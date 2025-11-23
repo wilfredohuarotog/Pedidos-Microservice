@@ -26,7 +26,7 @@ La aplicación utiliza **procesamiento por lotes (batch)** para manejar la carga
 - **Validación y manejo de errores por lote:** Cada lote se valida, y los errores se registran sin interrumpir la carga de los demás pedidos.
 - **Idempotencia:** Se utiliza una **clave Idempotency-Key** para evitar procesar dos veces el mismo archivo.
  
-## Ejecución del proyecto
+## Ejecución
 
 ### 1. Clonar el repositorio
 ```bash
