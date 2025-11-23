@@ -11,12 +11,12 @@ Microservicio para cargar pedidos desde archivos CSV. Arquitectura hexagonal y p
 - OpenCsv (Procesamiento de archivos csv)
 - OpenAPI / Swagger (Documentación)
 - OAuth2 Resource Server (Validación de JWT)
-- KeyCloak (registro de usurios y generación de JWT)
-- Docker (Contenerizado de db PostgreSQL y KeyCloak)
-- Junit5 / Mockito (pruebas unitarias)
+- KeyCloak (registro de usuarios y generación de JWT)
+- Docker (Contenerización de PostgreSQL y KeyCloak)
+- JUnit5 / Mockito (pruebas unitarias)
 - Postman (pruebas y generación de colección)
 
-## Estrategía Batch
+## Estrategia Batch
 La aplicación utiliza **procesamiento por lotes (batch)** para manejar la carga de pedidos desde archivos CSV de manera eficiente.  
 
 ### Detalles de la estrategia:
@@ -36,7 +36,7 @@ git clone https://github.com/wilfredohuarotog/Pedidos-Microservice.git
 ```
 cd Pedidos-Microservice
 ```
-### 3. Levantamos PostgreSQL y KeyCloak (docker-compose.yml)
+### 3. Levantar PostgreSQL y KeyCloak (docker-compose.yml)
 ```bash
 docker compose up -d
 ```
@@ -45,7 +45,7 @@ docker compose up -d
 mvn spring-boot:run
 ```
 ## Uso
-Al levantar keycloak ya se configuró para que tenga un realm con un usuario y contraseña, el cual se utilizará para las pruebas en Postman.
+Al levantar KeyCloak ya se configuró para que tenga un realm, con un usuario y contraseña, los cuales se utilizarán para las pruebas en Postman.
 
 ### 1. Obtener Token JWT (KeyCloak)
 - **Endpoint:** `POST http://localhost:8080/realms/pedidos-realm/protocol/openid-connect/token`.
