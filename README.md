@@ -45,11 +45,110 @@ Al levantar keycloak ya se configuró para que tenga un realm con un usuario y c
   `username: wilfredo`
   `password: 2299` 
 
+- Con el Token se procede a realizar las más solicitudes.
 
+### 2. Cargar de pedidos
+- Endpoint: `http://localhost:8081/pedidos/cargar`.
+- Authorization: Bearer Token (colocar el JWT generado anteriormente)
+- Headers: Idempotency-Key (colocar clave)
+- Body: file.csv (adjuntar archivo)
+  
+### 3. Respuestas
+#### Cargados correctamente
+```json
+{
+    "totalProcesados": 10,
+    "guardados": 10,
+    "conError": 0,
+    "erroresDetalle": [],
+    "erroresAgrupados": {}
+}
+```
+#### Cargados con errores
+```json
+{
+    {
+    "totalProcesados": 8,
+    "guardados": 1,
+    "conError": 7,
+    "erroresDetalle": [
+        {
+            "linea": 3,
+            "numeroPedido": "P101",
+            "motivos": [
+                "CLIENTE_NO_ENCONTRADO"
+            ]
+        },
+        {
+            "linea": 4,
+            "numeroPedido": "P102",
+            "motivos": [
+                "FECHA_INVALIDA"
+            ]
+        },
+        {
+            "linea": 5,
+            "numeroPedido": "P-103",
+            "motivos": [
+                "NUMERO_PEDIDO_INVALIDO",
+                "ESTADO_INVALIDO"
+            ]
+        },
+        {
+            "linea": 6,
+            "numeroPedido": "P104",
+            "motivos": [
+                "ZONA_INVALIDA"
+            ]
+        },
+        {
+            "linea": 7,
+            "numeroPedido": "P105",
+            "motivos": [
+                "CADENA_FRIO_NO_SOPORTADA"
+            ]
+        },
+        {
+            "linea": 8,
+            "numeroPedido": "",
+            "motivos": [
+                "NUMERO_PEDIDO_VACIO"
+            ]
+        },
+        {
+            "linea": 9,
+            "numeroPedido": "P100",
+            "motivos": [
+                "DUPLICADO"
+            ]
+        }
+    ],
+    "erroresAgrupados": {
+        "CADENA_FRIO_NO_SOPORTADA": 1,
+        "NUMERO_PEDIDO_INVALIDO": 1,
+        "ESTADO_INVALIDO": 1,
+        "CLIENTE_NO_ENCONTRADO": 1,
+        "FECHA_INVALIDA": 1,
+        "NUMERO_PEDIDO_VACIO": 1,
+        "DUPLICADO": 1,
+        "ZONA_INVALIDA": 1
+    }
+}
+}
+```
+#### Idempotency-key repetida
 
-
-
-
+```json
+{
+    "code": "DUPLICATE_REQUEST",
+    "message": "Carga ya procesada previamente",
+    "details": [
+        "Esta carga ya fue procesada previamente"
+    ],
+    "correlationId": null,
+    "timestamp": "2025-11-23T14:46:22.6011022"
+}
+```
 
 
 
