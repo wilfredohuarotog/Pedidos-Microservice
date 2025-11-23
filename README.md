@@ -20,11 +20,11 @@ Microservicio para cargar pedidos desde archivos CSV. Arquitectura hexagonal y p
 La aplicación utiliza **procesamiento por lotes (batch)** para manejar la carga de pedidos desde archivos CSV de manera eficiente.  
 
 ### Detalles de la estrategia:
-- **Tamaño configurable de lote:** Los pedidos se procesan en bloques de **500 registros**, configurable mediante la propiedad `batch.size` en `application.yml`.
-- **Carga de catálogos en memoria:** Antes de insertar los pedidos, se cargan los datos de **clientes** y **zonas** en memoria para validar y evitar consultas repetidas a la base de datos.
-- **Inserciones por lotes:** Los pedidos válidos se guardan en la base de datos en **sublistas del tamaño del batch**, reduciendo la cantidad de operaciones y mejorando el rendimiento.
+- **Tamaño configurable de lote:** Los pedidos se procesan en bloques de 500 registros, configurable mediante la propiedad `batch.size` en `application.yml`.
+- **Carga de catálogos en memoria:** Antes de insertar los pedidos, se cargan los datos de clientes y zonas en memoria para validar y evitar consultas repetidas a la base de datos.
+- **Inserciones por lotes:** Los pedidos válidos se guardan en la base de datos en sublistas del tamaño del batch, reduciendo la cantidad de operaciones y mejorando el rendimiento.
 - **Validación y manejo de errores por lote:** Cada lote se valida, y los errores se registran sin interrumpir la carga de los demás pedidos.
-- **Idempotencia:** Se utiliza una **clave Idempotency-Key** para evitar procesar dos veces el mismo archivo.
+- **Idempotencia:** Se utiliza una clave Idempotency-Key para evitar procesar dos veces el mismo archivo.
  
 ## Ejecución
 
