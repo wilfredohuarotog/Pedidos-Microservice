@@ -160,3 +160,4 @@ mvn clean test jacoco:report
 ```bash
 start target/site/jacoco/index.html
 ```
+- Cobertura del 86% en serivicios de dominio.
