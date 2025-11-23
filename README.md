@@ -34,6 +34,16 @@ docker compose up -d
 ```bash
 mvn spring-boot:run
 ```
+## Uso
+Al levantar keycloak ya se configuró para que tenga un realm con un usuario y contraseña, el cual se utilizará para las pruebas en Postman.
+
+### 1. Obtener Token JWT (KeyCloak)
+- Endpoint: `POST http://localhost:8080/realms/pedidos-realm/protocol/openid-connect/token`.
+- Body:
+  `grant_type: password`
+  `client_id: pedidos-api`
+  `username: wilfredo`
+  `password: 2299` 
 
 
 
