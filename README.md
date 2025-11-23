@@ -48,8 +48,8 @@ mvn spring-boot:run
 Al levantar keycloak ya se configuró para que tenga un realm con un usuario y contraseña, el cual se utilizará para las pruebas en Postman.
 
 ### 1. Obtener Token JWT (KeyCloak)
-- Endpoint: `POST http://localhost:8080/realms/pedidos-realm/protocol/openid-connect/token`.
-- Body:
+- **Endpoint:** `POST http://localhost:8080/realms/pedidos-realm/protocol/openid-connect/token`.
+- **Body:**
   `grant_type: password`
   `client_id: pedidos-api`
   `username: wilfredo`
@@ -58,10 +58,10 @@ Al levantar keycloak ya se configuró para que tenga un realm con un usuario y c
 - Con el Token se procede a realizar las más solicitudes.
 
 ### 2. Cargar de pedidos
-- Endpoint: `http://localhost:8081/pedidos/cargar`.
-- Authorization: Bearer Token (colocar el JWT generado anteriormente)
-- Headers: Idempotency-Key (colocar clave)
-- Body: file.csv (adjuntar archivo)
+- **Endpoint:** `http://localhost:8081/pedidos/cargar`.
+- **Authorization:** Bearer Token (colocar el JWT generado anteriormente)
+- **Headers:** Idempotency-Key (colocar clave)
+- **Body:** file.csv (adjuntar archivo)
   
 ### 3. Respuestas
 #### Cargados correctamente
