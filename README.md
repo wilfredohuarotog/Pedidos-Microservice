@@ -150,5 +150,13 @@ Al levantar keycloak ya se configuró para que tenga un realm con un usuario y c
 }
 ```
 
+## Testing
 
-
+### 1. Ejecutar test y reporte de JaCoCo
+```bash
+mvn clean test jacoco:report
+```
+### 2. Ver reporte de cobertura
+```bash
+start target/site/jacoco/index.html
+```
