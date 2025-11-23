@@ -163,6 +163,8 @@ start target/site/jacoco/index.html
 - Cobertura del 86% en servicios de dominio.
 
 ## Documentación
-Acceder a la documetación en tiempo de ejecución:
-- OpenApi: `http://localhost:8081/v3/api-docs`
-- Swagger-UI: `http://localhost:8081/swagger-ui.html`
+
+Acceder a la documentación en tiempo de ejecución:
+
+- [OpenAPI JSON](http://localhost:8081/v3/api-docs)
+- [Swagger UI](http://localhost:8081/swagger-ui.html)
