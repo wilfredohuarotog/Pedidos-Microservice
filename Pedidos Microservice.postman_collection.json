@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "9eedfb24-19d8-4a1a-8a36-72edbeb766c3",
+		"name": "Pedidos Microservice",
+		"description": "Colección para probar la API de carga de pedidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "46041910",
+		"_collection_link": "https://wilfredo-3775460.postman.co/workspace/39c6f0ac-393c-499e-89b9-5b9721494a66/collection/46041910-9eedfb24-19d8-4a1a-8a36-72edbeb766c3?action=share&source=collection_link&creator=46041910"
+	},
+	"item": [
+		{
+			"name": "1. Obtener Token JWT (Keycloak)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "pedidos-api",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "wilfredo",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "2299",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/realms/pedidos-realm/protocol/openid-connect/token",
+				"description": "Obtiene un token JWT de Keycloak para autenticar las siguientes peticiones."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Cargar pedidos válidos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJod0ZLNDFuY2NZZk1WbnE4alU5MlBJOHRfYmlXeUlGeFZKelh3Xzdoc0drIn0.eyJleHAiOjE3NjM5MTU5NzksImlhdCI6MTc2MzkxNTY3OSwianRpIjoiOGY5OTQyMTgtMTdiYS00MGY2LTllNWItMDYwMWVjNmI4MTM3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wZWRpZG9zLXJlYWxtIiwic3ViIjoiMWI1ZjdmNWUtZTMwZi00ZTlkLThiNjctOGY5OWI5NDIwMjFlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGVkaWRvcy1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZTNjNDZkMGQtZTU4Zi00NjE1LWE5YmItMjgzNWUzMDhmOTcyIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUzYzQ2ZDBkLWU1OGYtNDYxNS1hOWJiLTI4MzVlMzA4Zjk3MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3aWxmcmVkbyJ9.Hmmt7ZNzUDx47xu-uXUYcrdqa4JpC8nkVAoDgJf9CxGF-q5sQM6FFiPJ7ZUCRpFOs0wdweNLeYBQRLFEq2FaJevqM6XsuFzlUlHQgVPlBh3lWE2i2X9KUsq1QUC__cq2HMuuLj2mH_tqSTCJOe09O8LF3fbSYEqD9dHnWJnIcujLkpUkWIbFUmeOQjg-zFfKKVB-aM5ZCxGacfWJm3U8bHrLOog8cv3mZLMCmRq3ky7nK5M6PpwO9ncDtZw59neLHmYnHKnlBnPRcqKv9RdFa6klDLu17_kt_FntGchmO129t_0fZE1A92jvPaL_gBmOlO_eUHyH4Ri5LaU3He_hhw"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Desktop/JAVA S/pedidos-microservice/samples/pedidosCorrectos.csv"
+						}
+					]
+				},
+				"url": "http://localhost:8081/pedidos/cargar",
+				"description": "Carga un archivo CSV con pedidos válidos. Se espera que todos sean procesados exitosamente."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Cargar pedidos con errores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJod0ZLNDFuY2NZZk1WbnE4alU5MlBJOHRfYmlXeUlGeFZKelh3Xzdoc0drIn0.eyJleHAiOjE3NjM5MTU5NzksImlhdCI6MTc2MzkxNTY3OSwianRpIjoiOGY5OTQyMTgtMTdiYS00MGY2LTllNWItMDYwMWVjNmI4MTM3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wZWRpZG9zLXJlYWxtIiwic3ViIjoiMWI1ZjdmNWUtZTMwZi00ZTlkLThiNjctOGY5OWI5NDIwMjFlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGVkaWRvcy1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZTNjNDZkMGQtZTU4Zi00NjE1LWE5YmItMjgzNWUzMDhmOTcyIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUzYzQ2ZDBkLWU1OGYtNDYxNS1hOWJiLTI4MzVlMzA4Zjk3MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3aWxmcmVkbyJ9.Hmmt7ZNzUDx47xu-uXUYcrdqa4JpC8nkVAoDgJf9CxGF-q5sQM6FFiPJ7ZUCRpFOs0wdweNLeYBQRLFEq2FaJevqM6XsuFzlUlHQgVPlBh3lWE2i2X9KUsq1QUC__cq2HMuuLj2mH_tqSTCJOe09O8LF3fbSYEqD9dHnWJnIcujLkpUkWIbFUmeOQjg-zFfKKVB-aM5ZCxGacfWJm3U8bHrLOog8cv3mZLMCmRq3ky7nK5M6PpwO9ncDtZw59neLHmYnHKnlBnPRcqKv9RdFa6klDLu17_kt_FntGchmO129t_0fZE1A92jvPaL_gBmOlO_eUHyH4Ri5LaU3He_hhw"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "abcd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Desktop/JAVA S/pedidos-microservice/samples/pediddosErrores.csv"
+						}
+					]
+				},
+				"url": "http://localhost:8081/pedidos/cargar",
+				"description": "Carga un archivo CSV con varios tipos de errores para validar el manejo de validaciones."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Cargar archivo grande (batch)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJod0ZLNDFuY2NZZk1WbnE4alU5MlBJOHRfYmlXeUlGeFZKelh3Xzdoc0drIn0.eyJleHAiOjE3NjM5MTU5NzksImlhdCI6MTc2MzkxNTY3OSwianRpIjoiOGY5OTQyMTgtMTdiYS00MGY2LTllNWItMDYwMWVjNmI4MTM3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wZWRpZG9zLXJlYWxtIiwic3ViIjoiMWI1ZjdmNWUtZTMwZi00ZTlkLThiNjctOGY5OWI5NDIwMjFlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGVkaWRvcy1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZTNjNDZkMGQtZTU4Zi00NjE1LWE5YmItMjgzNWUzMDhmOTcyIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUzYzQ2ZDBkLWU1OGYtNDYxNS1hOWJiLTI4MzVlMzA4Zjk3MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3aWxmcmVkbyJ9.Hmmt7ZNzUDx47xu-uXUYcrdqa4JpC8nkVAoDgJf9CxGF-q5sQM6FFiPJ7ZUCRpFOs0wdweNLeYBQRLFEq2FaJevqM6XsuFzlUlHQgVPlBh3lWE2i2X9KUsq1QUC__cq2HMuuLj2mH_tqSTCJOe09O8LF3fbSYEqD9dHnWJnIcujLkpUkWIbFUmeOQjg-zFfKKVB-aM5ZCxGacfWJm3U8bHrLOog8cv3mZLMCmRq3ky7nK5M6PpwO9ncDtZw59neLHmYnHKnlBnPRcqKv9RdFa6klDLu17_kt_FntGchmO129t_0fZE1A92jvPaL_gBmOlO_eUHyH4Ri5LaU3He_hhw"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "abc123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Desktop/JAVA S/pedidos-microservice/samples/pedidos520.csv"
+						}
+					]
+				},
+				"url": "http://localhost:8081/pedidos/cargar",
+				"description": "Carga un archivo grande (1000 registros) para probar el procesamiento por lotes."
+			},
+			"response": []
+		},
+		{
+			"name": "5. Prueba de Idempotencia (Carga duplicada)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJod0ZLNDFuY2NZZk1WbnE4alU5MlBJOHRfYmlXeUlGeFZKelh3Xzdoc0drIn0.eyJleHAiOjE3NjM5MTU5NzksImlhdCI6MTc2MzkxNTY3OSwianRpIjoiOGY5OTQyMTgtMTdiYS00MGY2LTllNWItMDYwMWVjNmI4MTM3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wZWRpZG9zLXJlYWxtIiwic3ViIjoiMWI1ZjdmNWUtZTMwZi00ZTlkLThiNjctOGY5OWI5NDIwMjFlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGVkaWRvcy1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZTNjNDZkMGQtZTU4Zi00NjE1LWE5YmItMjgzNWUzMDhmOTcyIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUzYzQ2ZDBkLWU1OGYtNDYxNS1hOWJiLTI4MzVlMzA4Zjk3MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3aWxmcmVkbyJ9.Hmmt7ZNzUDx47xu-uXUYcrdqa4JpC8nkVAoDgJf9CxGF-q5sQM6FFiPJ7ZUCRpFOs0wdweNLeYBQRLFEq2FaJevqM6XsuFzlUlHQgVPlBh3lWE2i2X9KUsq1QUC__cq2HMuuLj2mH_tqSTCJOe09O8LF3fbSYEqD9dHnWJnIcujLkpUkWIbFUmeOQjg-zFfKKVB-aM5ZCxGacfWJm3U8bHrLOog8cv3mZLMCmRq3ky7nK5M6PpwO9ncDtZw59neLHmYnHKnlBnPRcqKv9RdFa6klDLu17_kt_FntGchmO129t_0fZE1A92jvPaL_gBmOlO_eUHyH4Ri5LaU3He_hhw"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Desktop/JAVA S/pedidos-microservice/samples/pedidosCorrectos.csv"
+						}
+					]
+				},
+				"url": "http://localhost:8081/pedidos/cargar",
+				"description": "Intenta cargar el mismo archivo con la misma Idempotency-Key. Debe retornar error 409."
+			},
+			"response": []
+		},
+		{
+			"name": "6. Cargar sin idempotency-key (error)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJod0ZLNDFuY2NZZk1WbnE4alU5MlBJOHRfYmlXeUlGeFZKelh3Xzdoc0drIn0.eyJleHAiOjE3NjM5MTU5NzksImlhdCI6MTc2MzkxNTY3OSwianRpIjoiOGY5OTQyMTgtMTdiYS00MGY2LTllNWItMDYwMWVjNmI4MTM3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wZWRpZG9zLXJlYWxtIiwic3ViIjoiMWI1ZjdmNWUtZTMwZi00ZTlkLThiNjctOGY5OWI5NDIwMjFlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGVkaWRvcy1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZTNjNDZkMGQtZTU4Zi00NjE1LWE5YmItMjgzNWUzMDhmOTcyIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImUzYzQ2ZDBkLWU1OGYtNDYxNS1hOWJiLTI4MzVlMzA4Zjk3MiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ3aWxmcmVkbyJ9.Hmmt7ZNzUDx47xu-uXUYcrdqa4JpC8nkVAoDgJf9CxGF-q5sQM6FFiPJ7ZUCRpFOs0wdweNLeYBQRLFEq2FaJevqM6XsuFzlUlHQgVPlBh3lWE2i2X9KUsq1QUC__cq2HMuuLj2mH_tqSTCJOe09O8LF3fbSYEqD9dHnWJnIcujLkpUkWIbFUmeOQjg-zFfKKVB-aM5ZCxGacfWJm3U8bHrLOog8cv3mZLMCmRq3ky7nK5M6PpwO9ncDtZw59neLHmYnHKnlBnPRcqKv9RdFa6klDLu17_kt_FntGchmO129t_0fZE1A92jvPaL_gBmOlO_eUHyH4Ri5LaU3He_hhw"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Desktop/JAVA S/pedidos-microservice/samples/pedidosCorrectos.csv"
+						}
+					]
+				},
+				"url": "http://localhost:8081/pedidos/cargar",
+				"description": "Intenta cargar sin el header Idempotency-Key. Debe retornar error 400."
+			},
+			"response": []
+		}
+	]
+}
